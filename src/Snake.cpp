@@ -42,3 +42,7 @@ sf::Vector2i Snake::getDirection() const {
 void Snake::setDirection(sf::Vector2i dir) {
     direction = dir;
 }
+
+sf::Vector2i Snake::getHead() const {
+    return body.front();
+}

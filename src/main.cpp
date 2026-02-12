@@ -41,6 +41,11 @@ int main() {
             
             snake.update(false); // Por ahora no crece
 
+            // Comprobar colisión con los bordes
+            if (snake.getHead().x < 0 || snake.getHead().x >= 40 || snake.getHead().y < 0 || snake.getHead().y >= 30) {
+                window.close(); // Esto cierra la aplicación
+            }
+
             // Vaciamos para volver a empezar
             timer = 0;
         }

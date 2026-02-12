@@ -22,6 +22,7 @@ class Snake {
 
         // Getters
         sf::Vector2i getDirection() const;
+        sf::Vector2i getHead() const;
 
         //Setters
         void setDirection(sf::Vector2i direction);
