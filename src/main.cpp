@@ -3,7 +3,7 @@
 #include "../include/Snake.h"
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Snake");
+    sf::RenderWindow window(sf::VideoMode(600, 800), "Snake");
     window.setFramerateLimit(60);
 
     sf::Clock clock;
@@ -42,7 +42,7 @@ int main() {
             snake.update(false); // Por ahora no crece
 
             // Comprobar colisión con los bordes
-            if (snake.getHead().x < 0 || snake.getHead().x >= 40 || snake.getHead().y < 0 || snake.getHead().y >= 30) {
+            if (snake.getHead().x < 0 || snake.getHead().x >= 30 || snake.getHead().y < 0 || snake.getHead().y >= 40) {
                 window.close(); // Esto cierra la aplicación
             }
 
