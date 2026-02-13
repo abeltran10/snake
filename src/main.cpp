@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "../include/Snake.h"
+#include "../include/Food.h"
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(600, 800), "Snake");
@@ -10,6 +11,7 @@ int main() {
     float timer = 0, delay = 0.1;
 
     Snake snake;
+    Food food(snake.getBody());
     
     while (window.isOpen()) {
         // Obtenemos cuánto duró esta vuelta del bucle (ej: 0.016s)
@@ -38,12 +40,23 @@ int main() {
 
         // Ha pasado el tiempo suficiente (ej: 0.1s)
         if (timer > delay) {
-            
-            snake.update(false); // Por ahora no crece
+           
+            // ¿Hay colisión con la comida?
+            if (snake.getHead() == food.getPosition()) {
+                snake.update(true); // Crece
+                food.respawn(snake.getBody());     // Nueva comida
+            } else {
+                snake.update(false); // Movimiento normal
+            }
 
             // Comprobar colisión con los bordes
             if (snake.getHead().x < 0 || snake.getHead().x >= 30 || snake.getHead().y < 0 || snake.getHead().y >= 40) {
                 window.close(); // Esto cierra la aplicación
+            }
+
+            // Comprobar que no colisiona con ella misma
+            if (snake.checkSelfCollision()) {
+                window.close();
             }
 
             // Vaciamos para volver a empezar
@@ -52,7 +65,9 @@ int main() {
 
         window.clear();
         snake.draw(window, 20);
+        food.draw(window, 20);
         window.display();
     }
+
     return 0;
 }
