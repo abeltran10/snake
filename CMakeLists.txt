@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
 # Definir el ejecutable y sus fuentes
-add_executable(snake_game src/main.cpp src/Snake.cpp)
+add_executable(snake_game src/main.cpp src/Snake.cpp src/Food.cpp) 
 
 target_include_directories(snake_game PRIVATE include)
 

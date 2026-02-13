@@ -35,14 +35,28 @@ void Snake::update(bool grow) {
     // Si ha comido (grow == true), no hacemos pop_back y así la serpiente crece
 }
 
+bool Snake::checkSelfCollision() const {
+    // Recorremos el cuerpo empezando DESPUÉS de la cabeza (índice 1)
+    for (size_t i = 1; i < body.size(); ++i) {
+        if (body[0] == body[i]) {
+            return true; // La cabeza está en la misma posición que un segmento del cuerpo
+        }
+    }
+    return false;
+}
+
 sf::Vector2i Snake::getDirection() const {
     return direction;
 }
 
-void Snake::setDirection(sf::Vector2i dir) {
-    direction = dir;
+void Snake::setDirection(sf::Vector2i direction) {
+    this->direction = direction;
 }
 
 sf::Vector2i Snake::getHead() const {
     return body.front();
+}
+
+std::deque<sf::Vector2i> Snake::getBody() const {
+    return body;
 }
